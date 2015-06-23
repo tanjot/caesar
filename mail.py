@@ -8,16 +8,23 @@ import socket
 
 init()
 
+def read_data_from_file():
+
+    filename = input('Enter file to read data: ')
+
+    fhan = open( filename, 'r')
+
+    return fhan.read()
+
 def main():
 
     try:
-        content = """Hi learning to mail the pythonic way"""
 
         mail = smtplib.SMTP()
 
         mail.connect(host='smtp.gmail.com', port=587)
 
-        #mail.set_debuglevel(True)
+        mail.set_debuglevel(True)
 
         mail.ehlo()
 
@@ -26,6 +33,8 @@ def main():
         email = input('Enter login details\nEmail: ')
         password = getpass.getpass('Enter password: ')
         mail.login(email, password)
+
+        content = read_data_from_file()
 
         receiver = input('Enter recipients address: ')
 
