@@ -2,33 +2,43 @@
 
 import smtplib
 import getpass
+from colorama import Fore
+from colorama import init
+import socket
+
+init()
 
 def main():
 
+    try:
+        content = """Hi learning to mail the pythonic way"""
 
-    content = """Hi learning to mail the pythonic way"""
+        mail = smtplib.SMTP()
 
-    mail = smtplib.SMTP()
+        mail.connect(host='smtp.gmail.com', port=587)
 
-    mail.connect(host='smtp.gmail.com', port=587)
+        #mail.set_debuglevel(True)
 
-    mail.set_debuglevel(True)
+        mail.ehlo()
 
-    mail.ehlo()
+        mail.starttls()
 
-    mail.starttls()
+        email = input('Enter login details\nEmail: ')
+        password = getpass.getpass('Enter password: ')
+        mail.login(email, password)
 
-    mail.ehlo()
+        receiver = input('Enter recipients address: ')
 
-    email = input('Enter login details\nEmail: ')
-    password = getpass.getpass('Enter password: ')
-    mail.login(email, password)
+        mail.sendmail(email, receiver, content)
 
-    receiver = input('Enter recipients address: ')
+        mail.close()
+    except ConnectionRefusedError:
+        print(Fore.RED+'Connection refused')
+    except socket.gaierror:
+        print(Fore.RED+'Problem connecting with host, check hostname or port')
+    except smtplib.SMTPAuthenticationError:
+        print(Fore.RED+'Invalide username or password')
 
-    mail.sendmail(email, receiver, content)
-
-    mail.close()
 
 if __name__ == '__main__':
     main()
