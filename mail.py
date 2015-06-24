@@ -4,6 +4,8 @@ import smtplib
 import getpass
 from colorama import Fore
 from colorama import init
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 import socket
 
 init()
@@ -17,6 +19,20 @@ def read_data_from_file():
     return fhan.read()
 
 
+def prepare_msg():
+    msg = MIMEMultipart()
+
+    msg = MIMEText(read_data_from_file())
+
+    msg['From'] =  input('Enter login details\nEmail: ') 
+
+    msg['To'] = input('Enter recipients address: ')
+
+    msg['Subject'] = 'Mailing using python'
+
+    return msg
+    
+
 def main():
 
     try:
@@ -29,17 +45,16 @@ def main():
 
         mail.starttls()
 
-        email = input('Enter login details\nEmail: ')
+        msg = prepare_msg()
+
         password = getpass.getpass('Enter password: ')
-        mail.login(email, password)
+    
+        mail.login(msg['From'], password)
 
-        content = read_data_from_file()
-
-        receiver = input('Enter recipients address: ')
-
-        mail.sendmail(email, receiver, content)
+        mail.sendmail(msg['From'], msg['To'], msg.as_string())
 
         mail.close()
+
     except ConnectionRefusedError:
         print(Fore.RED+'Connection refused')
     except socket.gaierror:
