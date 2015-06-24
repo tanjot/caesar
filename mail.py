@@ -41,13 +41,14 @@ def prepare_msg():
 
 #msg = MIMEText(read_data_from_file())
 
+    msg.attach(attach_file())
+
     msg['To'] = input('Enter recipients address: ')
 
     msg['From'] =  input('Enter login details\nEmail: ') 
 
     msg['Subject'] = 'Mailing using python'
 
-    msg.attach(attach_file())
 
 
     return msg
