@@ -4,9 +4,12 @@ import smtplib
 import getpass
 from colorama import Fore
 from colorama import init
+from email import encoders
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
 import socket
+import os
 
 init()
 
@@ -20,20 +23,32 @@ def read_data_from_file():
 
     fhan.close()
 
-    return content
+    return content, filename
     
+def attach_file():
+    base = MIMEBase('application', "octet-stream")
+    
+    content, filename = read_data_from_file()
+    
+    base.set_payload(content)
+    encoders.encode_base64(base)
+    base.add_header('Content-disposition', 'attachment', filename=filename)
 
+    return base
 
 def prepare_msg():
     msg = MIMEMultipart()
 
-    msg = MIMEText(read_data_from_file())
+#msg = MIMEText(read_data_from_file())
 
     msg['To'] = input('Enter recipients address: ')
 
     msg['From'] =  input('Enter login details\nEmail: ') 
 
     msg['Subject'] = 'Mailing using python'
+
+    msg.attach(attach_file())
+
 
     return msg
     
