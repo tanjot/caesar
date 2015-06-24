@@ -21,15 +21,17 @@ def read_data_from_file():
     fhan.close()
 
     return content
+    
+
 
 def prepare_msg():
     msg = MIMEMultipart()
 
     msg = MIMEText(read_data_from_file())
 
-    msg['From'] =  input('Enter login details\nEmail: ') 
-
     msg['To'] = input('Enter recipients address: ')
+
+    msg['From'] =  input('Enter login details\nEmail: ') 
 
     msg['Subject'] = 'Mailing using python'
 
