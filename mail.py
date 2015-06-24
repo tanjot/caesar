@@ -16,13 +16,12 @@ def read_data_from_file():
 
     return fhan.read()
 
+
 def main():
 
     try:
 
-        mail = smtplib.SMTP()
-
-        mail.connect(host='smtp.gmail.com', port=587)
+        mail = smtplib.SMTP(host='smtp.gmail.com', port=587)
 
         mail.set_debuglevel(True)
 
