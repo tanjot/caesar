@@ -31,13 +31,18 @@ def attach_file():
 
     return base
 
+def get_email():
+    return input('Enter login details\nEmail: ')
+
+def get_password():
+    return getpass.getpass('Enter password: ')
 
 def prepare_msg():
     msg = MIMEMultipart()
     #msg = MIMEText(read_data_from_file())
     msg.attach(attach_file())
     msg['To'] = input('Enter recipients address: ')
-    msg['From'] = input('Enter login details\nEmail: ')
+    msg['From'] = get_email()
     msg['Subject'] = 'Mailing using python'
     return msg
 
@@ -49,7 +54,7 @@ def main():
         mail.ehlo()
         mail.starttls()
         msg = prepare_msg()
-        password = getpass.getpass('Enter password: ')
+        password = get_password()
         mail.login(msg['From'], password)
         mail.sendmail(msg['From'], msg['To'], msg.as_string())
         mail.close()
