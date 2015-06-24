@@ -16,8 +16,11 @@ def read_data_from_file():
 
     fhan = open( filename, 'r')
 
-    return fhan.read()
+    content = fhan.read()
 
+    fhan.close()
+
+    return content
 
 def prepare_msg():
     msg = MIMEMultipart()
