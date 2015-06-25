@@ -47,7 +47,7 @@ def prepare_msg():
 
     msg['From'] =  input('Enter login details\nEmail: ')
 
-    msg['Subject'] = 'Mailing using python'
+    msg['Subject'] = input('Give a subject: ')
 
 
 
