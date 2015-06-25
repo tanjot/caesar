@@ -17,19 +17,19 @@ def read_data_from_file():
 
     filename = input('Enter file to read data: ')
 
-    fhan = open( filename, 'r')
+    fhan = open( filename, 'rb')
 
     content = fhan.read()
 
     fhan.close()
 
     return content, filename
-    
+
 def attach_file():
     base = MIMEBase('application', "octet-stream")
-    
+
     content, filename = read_data_from_file()
-    
+
     base.set_payload(content)
     encoders.encode_base64(base)
     base.add_header('Content-disposition', 'attachment', filename=filename)
@@ -45,14 +45,14 @@ def prepare_msg():
 
     msg['To'] = input('Enter recipients address: ')
 
-    msg['From'] =  input('Enter login details\nEmail: ') 
+    msg['From'] =  input('Enter login details\nEmail: ')
 
     msg['Subject'] = 'Mailing using python'
 
 
 
     return msg
-    
+
 
 def main():
 
@@ -69,7 +69,7 @@ def main():
         msg = prepare_msg()
 
         password = getpass.getpass('Enter password: ')
-    
+
         mail.login(msg['From'], password)
 
         mail.sendmail(msg['From'], msg['To'], msg.as_string())
