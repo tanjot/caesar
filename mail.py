@@ -14,20 +14,17 @@ import os
 init()
 
 def read_data_from_file():
-
     filename = input('Enter file to read data: ')
 
     fhan = open( filename, 'rb')
 
     content = fhan.read()
-
     fhan.close()
-
     return content, filename
+
 
 def attach_file():
     base = MIMEBase('application', "octet-stream")
-
     content, filename = read_data_from_file()
 
     base.set_payload(content)
@@ -36,67 +33,43 @@ def attach_file():
 
     return base
 
+def get_email():
+    return input('Enter login details\nEmail: ')
+
+def get_password():
+    return getpass.getpass('Enter password: ')
+
 def prepare_msg():
     msg = MIMEMultipart()
-
-#msg = MIMEText(read_data_from_file())
-
+    #msg = MIMEText(read_data_from_file())
     msg.attach(attach_file())
-
     msg['To'] = input('Enter recipients address: ')
-
-    msg['From'] =  input('Enter login details\nEmail: ')
-
     msg['Subject'] = input('Give a subject: ')
-
-
+    msg['From'] = get_email()
 
     return msg
 
 
 def main():
-
     try:
-
         mail = smtplib.SMTP(host='smtp.gmail.com', port=587)
-
         mail.set_debuglevel(True)
-
         mail.ehlo()
-
         mail.starttls()
-
         msg = prepare_msg()
-
-        password = getpass.getpass('Enter password: ')
+    
+        password = get_password()
 
         mail.login(msg['From'], password)
-
         mail.sendmail(msg['From'], msg['To'], msg.as_string())
-
         mail.close()
-
     except ConnectionRefusedError:
-        print(Fore.RED+'Connection refused')
+        print(Fore.RED + 'Connection refused')
     except socket.gaierror:
-        print(Fore.RED+'Problem connecting with host, check hostname or port')
+        print(Fore.RED + 'Problem connecting with host, check hostname or port')
     except smtplib.SMTPAuthenticationError:
-        print(Fore.RED+'Invalide username or password')
+        print(Fore.RED + 'Invalide username or password')
 
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
