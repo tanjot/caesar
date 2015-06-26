@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/tanjot/caesar.png?label=ready&title=Ready)](https://waffle.io/tanjot/caesar)
 Caesar
 ======
 
