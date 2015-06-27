@@ -10,6 +10,7 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 import socket
 import os
+from .save_credential import get_password
 
 init()
 
@@ -36,12 +37,16 @@ def attach_file():
 def get_email():
     return input('Enter login details\nEmail: ')
 
-def get_password():
+def get_password_from_user():
     return getpass.getpass('Enter password: ')
+
+def get_password_from_file(email):
+    return get_password(email)
 
 def prepare_msg():
     msg = MIMEMultipart()
     #msg = MIMEText(read_data_from_file())
+
     msg.attach(attach_file())
     msg['To'] = input('Enter recipients address: ')
     msg['Subject'] = input('Give a subject: ')
@@ -57,8 +62,8 @@ def main():
         mail.ehlo()
         mail.starttls()
         msg = prepare_msg()
-    
-        password = get_password()
+
+        password = get_password_from_file(msg['From'])
 
         mail.login(msg['From'], password)
         mail.sendmail(msg['From'], msg['To'], msg.as_string())
