@@ -10,12 +10,6 @@ def save_email_password(email, pwd):
 
 def get_password(email_recv):
     pwd=None
-#    with open(filename, 'r+') as fhan:
-#        email = fhan.readline().strip()
-#        if email == email_recv:
-#            pwd = fhan.readline()
-#            return pwd
-#        fhan.readline()
 
     fhan = open(filename, 'r')
 
