@@ -55,4 +55,4 @@ target/
 
 #Local
 tags
-credentials.txt
+caesar.conf

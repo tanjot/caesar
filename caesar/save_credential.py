@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 from email import encoders
-filename='credentials.txt'
+filename='caesar.conf'
 
 def save_email_password(email, pwd):
     with open(filename, 'a') as fhan:
