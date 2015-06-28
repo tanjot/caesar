@@ -2,7 +2,7 @@ from setuptools import setup
 
 add_keywords = dict(
     entry_points={
-        'console_scripts' : ['caesar=caesar.mail:main'],
+        'console_scripts' : ['caesar=caesar.main:main'],
     },)
 
 fhan = open('requirements.txt', 'rU')

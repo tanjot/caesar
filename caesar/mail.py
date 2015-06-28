@@ -1,14 +1,12 @@
 #!/usr/bin/python3
 
-import smtplib
 import getpass
-from colorama import Fore
-from colorama import init
+
 from email import encoders
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
-import socket
+from colorama import init
 import os
 from .save_credential import get_password
 
@@ -55,26 +53,26 @@ def prepare_msg():
     return msg
 
 
-def main():
-    try:
-        mail = smtplib.SMTP(host='smtp.gmail.com', port=587)
-        mail.set_debuglevel(True)
-        mail.ehlo()
-        mail.starttls()
-        msg = prepare_msg()
-
-        password = get_password_from_file(msg['From'])
-
-        mail.login(msg['From'], password)
-        mail.sendmail(msg['From'], msg['To'], msg.as_string())
-        mail.close()
-    except ConnectionRefusedError:
-        print(Fore.RED + 'Connection refused')
-    except socket.gaierror:
-        print(Fore.RED + 'Problem connecting with host, check hostname or port')
-    except smtplib.SMTPAuthenticationError:
-        print(Fore.RED + 'Invalide username or password')
 
 
-if __name__ == '__main__':
-    main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
