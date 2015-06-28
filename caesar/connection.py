@@ -5,6 +5,7 @@ import socket
 
 from .mail import get_password_from_file
 from colorama import init
+from colorama import Fore
 
 init()
 
@@ -27,7 +28,10 @@ class Connection:
 
     def send_mail(self, msg):
 
-        password = get_password_from_file(msg['from'])
-        self.server.login(msg['from'], password)
-        self.server.sendmail(msg['from'], msg['to'], msg.as_string())
-        self.server.close()
+        try:
+            password = get_password_from_file(msg['from'])
+            self.server.login(msg['from'], password)
+            self.server.sendmail(msg['from'], msg['to'], msg.as_string())
+            self.server.close()
+        except smtplib.SMTPAuthenticationError:
+            print(Fore.RED+'Username/Password could not be authenticated')
