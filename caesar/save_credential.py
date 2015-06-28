@@ -13,9 +13,9 @@ def save_email_password(email, pwd):
 def get_password(email_recv):
     pwd=None
 
-    fhan = open(filename, 'r')
 
     try:
+        fhan = open(filename, 'r')
         email = fhan.readline().strip()
         while email:
             if email == email_recv:
@@ -25,6 +25,8 @@ def get_password(email_recv):
             email=fhan.readline().strip()
     except StopIteration:
         fhan.close()
+    except FileNotFoundError:
+        print('Configuration file does not exist')
 
     return pwd
 
