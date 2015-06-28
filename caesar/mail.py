@@ -37,7 +37,12 @@ def get_password_from_user():
     return getpass.getpass('Enter password: ')
 
 def get_password_from_file(email):
-    return get_password(email)
+    pwd = get_password(email)
+
+    if pwd is None:
+        pwd = get_password_from_user()
+
+    return pwd
 
 def prepare_msg():
     msg = MIMEMultipart()
