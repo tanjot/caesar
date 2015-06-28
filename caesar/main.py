@@ -2,10 +2,8 @@
 
 from .connection import Connection
 from .mail import prepare_msg
-from .mail import get_email
 from .mail import get_password_from_user
 from .save_credential import save_email_password
-from colorama import Fore
 
 import argparse
 

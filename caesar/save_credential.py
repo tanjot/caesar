@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-from email import encoders
 from os import path
 
 filename = path.join(path.expanduser('~'), 'caesar.conf')
