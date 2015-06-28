@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 
 from email import encoders
-filename='caesar.conf'
+from os import path
+
+filename = path.join(path.expanduser('~'), 'caesar.conf')
 
 def save_email_password(email, pwd):
     with open(filename, 'a') as fhan:
