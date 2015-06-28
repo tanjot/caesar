@@ -56,3 +56,7 @@ target/
 #Local
 tags
 caesar.conf
+
+#IntelliJ
+.idea/
+*iml
