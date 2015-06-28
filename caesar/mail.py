@@ -6,11 +6,9 @@ from email import encoders
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
-from colorama import init
 import os
 from .save_credential import get_password
 
-init()
 
 def read_data_from_file():
     filename = input('Enter file to read data: ')
