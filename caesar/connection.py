@@ -17,11 +17,11 @@ class Connection:
             self.server.ehlo()
             self.server.starttls()
         except ConnectionRefusedError:
-            print(fore.red + 'connection refused')
+            print(Fore.RED + 'connection refused')
         except socket.gaierror:
-            print(fore.red + 'problem connecting with host, check hostname or port')
+            print(Fore.RED + 'problem connecting with host, check hostname or port')
         except smtplib.SMTPAuthenticationError:
-            print(fore.red + 'invalide username or password')
+            print(Fore.RED + 'invalide username or password')
 
 
 
