@@ -55,9 +55,9 @@ def main():
 
             host, port = get_server_conf('gmail')
 
-        conn.create_conn(host, port)
-        msg = prepare_msg()
-        conn.send_mail(msg)
+        if conn.create_conn(host, port) is True:
+            msg = prepare_msg()
+            conn.send_mail(msg)
 
 
 if __name__ == '__main__':
