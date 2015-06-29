@@ -16,6 +16,11 @@ def parse_args():
                         type=str
                         )
 
+    parser.add_argument('-ss', '--server_conf',
+                        help='Save SMTP server setting '
+                        'of mailing client(hostname, host, port)',
+                        nargs=3
+                        )
     return parser.parse_args()
 
 def main():
