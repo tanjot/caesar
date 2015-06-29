@@ -3,6 +3,7 @@
 from os import path
 
 cred_filename = path.join(path.expanduser('~'), 'caesar_user.conf')
+server_conf_filename = path.join(path.expanduser('~'), 'caesar_server.conf')
 
 def save_email_password(email, pwd):
     with open(cred_filename, 'a') as fhan:
@@ -29,5 +30,9 @@ def get_password(email_recv):
     return pwd
 
 
+def save_server_conf(name, host, port):
+    with open(server_conf_filename, 'a')as fhan:
+        fhan.write(name+'\n')
+        fhan.write(host+':'+port+'\n')
 
 
