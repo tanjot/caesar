@@ -10,7 +10,7 @@ import argparse
 def parse_args():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('-c', '--add_cred',
+    parser.add_argument('-sc', '--add_cred',
                         help='Save username and password '
                         'in configuration file',
                         type=str
