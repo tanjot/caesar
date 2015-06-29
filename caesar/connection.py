@@ -35,3 +35,5 @@ class Connection:
             self.server.close()
         except smtplib.SMTPAuthenticationError:
             print(Fore.RED+'Username/Password could not be authenticated')
+        except smtplib.SMTPServerDisconnected:
+            print(Fore.RED + 'Connection got disconnected')
