@@ -55,4 +55,10 @@ def get_server_conf(host_name_recv):
     except FileNotFoundError:
         print('Configuration file does not exist')
 
+    #Following case will not create connection, gives SMTPServerDisconnected
+    #exception
+    if host is None or port is None:
+        print('Problem finding the specified settings. Either the settings'
+        'stored are incorrect or server configuration file does not exist')
+
     return host, port
