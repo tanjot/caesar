@@ -35,4 +35,24 @@ def save_server_conf(name, host, port):
         fhan.write(name+'\n')
         fhan.write(host+':'+port+'\n')
 
+def get_server_conf(host_name_recv):
+    host = None
+    port = None
 
+    try:
+        fhan = open(server_conf_filename, 'r')
+        host_name = fhan.readline().strip()
+        while host_name:
+            if host_name == host_name_recv:
+                line = fhan.readline().strip().split(':')
+                host=line[0]
+                port=line[1]
+                break
+            fhan.readline()
+            host_name = fhan.readline().strip()
+    except StopIteration:
+        fhan.close()
+    except FileNotFoundError:
+        print('Configuration file does not exist')
+
+    return host, port
