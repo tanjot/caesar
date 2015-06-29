@@ -11,9 +11,9 @@ init()
 
 class Connection:
 
-    def create_conn(self):
+    def create_conn(self, host, port):
         try:
-            self.server = smtplib.SMTP(host='smtp.gmail.com', port=587)
+            self.server = smtplib.SMTP(host, port)
             self.server.set_debuglevel(True)
             self.server.ehlo()
             self.server.starttls()
