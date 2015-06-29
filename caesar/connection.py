@@ -19,12 +19,18 @@ class Connection:
             self.server.starttls()
         except ConnectionRefusedError:
             print(Fore.RED + 'connection refused')
+            return False
         except socket.gaierror:
             print(Fore.RED + 'problem connecting with host, check hostname or port')
+            return False
         except smtplib.SMTPAuthenticationError:
             print(Fore.RED + 'invalide username or password')
+            return False
+        except smtplib.SMTPServerDisconnected:
+            print(Fore.RED + 'Server disconnected')
+            return False
 
-
+        return True
 
     def send_mail(self, msg):
 
