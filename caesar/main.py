@@ -21,6 +21,12 @@ def parse_args():
                         'of mailing client(hostname, host, port)',
                         nargs=3
                         )
+    parser.add_argument('-c', '--choose_conf',
+                        help='Choose configurations'
+                        'for mailing client. Just give the hostname'
+                        ' given while saving settings'
+                        #add choices
+                        )
     return parser.parse_args()
 
 def main():
