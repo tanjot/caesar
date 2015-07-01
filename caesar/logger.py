@@ -12,14 +12,14 @@ TRACE=41 #1 above logging.ERROR
 logging.addLevelName(TRACE, 'TRACE') #Renaming logging.CRITICAL
 
 VERBOSITY_LEVELS = {
-                    'debug' : TRACE,
+                    'trace' : TRACE,
                     'error' : logging.ERROR,
                     'info'  : logging.INFO
                     }
 
 class Logger:
     def __init__(self):
-        verbosity = VERBOSITY_LEVELS['info']
+        verbosity = VERBOSITY_LEVELS['trace']
 
         log_format = logging.Formatter('%(message)s')
 
@@ -32,7 +32,7 @@ class Logger:
         self.log_handle.addHandler(stream_handle)
 
     def print_log(self, msg, verbosity=VERBOSITY_LEVELS['info']):
-        if verbosity == VERBOSITY_LEVELS['debug']:
+        if verbosity == VERBOSITY_LEVELS['trace']:
             self.log_handle.log(verbosity, Fore.CYAN+msg)
 
         elif verbosity == VERBOSITY_LEVELS['error']:
