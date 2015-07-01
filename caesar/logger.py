@@ -8,8 +8,11 @@ from colorama import Fore
 
 init(autoreset=True)
 
+TRACE=41 #1 above logging.ERROR
+logging.addLevelName(TRACE, 'TRACE') #Renaming logging.CRITICAL
+
 VERBOSITY_LEVELS = {
-                    'debug' : logging.CRITICAL,
+                    'debug' : TRACE,
                     'error' : logging.ERROR,
                     'info'  : logging.INFO
                     }
