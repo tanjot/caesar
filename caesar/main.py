@@ -29,6 +29,14 @@ def parse_args():
                         ' given while saving settings'
                         #add choices
                         )
+
+    parser.add_argument('-v', '--verbosity',
+                        help='Level of viewing logs: 1. Only info, '
+                        '2.Info and errors, 3. Trace of all request '
+                        'and reply messages',
+                        type=int,
+                        choices=range(1, 4)
+                        )
     return parser.parse_args()
 
 def main():
