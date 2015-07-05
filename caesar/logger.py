@@ -49,3 +49,13 @@ class Logger:
 
         else:
             self.log_handle.log(verbosity, Fore.MAGENTA+msg)
+
+    def get_verbosity_level(self, verbosity):
+        ret_value = VERBOSITY_LEVELS['info']
+        if (verbosity == 3):
+            ret_value =  VERBOSITY_LEVELS['trace']
+        elif (verbosity == 2):
+            ret_value = VERBOSITY_LEVELS['error']
+
+        return ret_value
+
