@@ -41,15 +41,16 @@ class Logger:
 
         self.log_handle.addHandler(stream_handle)
 
-    def print_log(self, msg, verbosity=VERBOSITY_LEVELS['info']):
-        if verbosity == VERBOSITY_LEVELS['trace']:
-            self.log_handle.log(verbosity, Fore.CYAN+msg)
+    def print_log(self, verbosity=VERBOSITY_LEVELS['info'], msg=None):
+        if msg is not None:
+            if verbosity == VERBOSITY_LEVELS['trace']:
+                self.log_handle.log(verbosity, Fore.CYAN+msg)
 
-        elif verbosity == VERBOSITY_LEVELS['error']:
-            self.log_handle.log(verbosity, Fore.RED+msg)
+            elif verbosity == VERBOSITY_LEVELS['error']:
+                self.log_handle.log(verbosity, Fore.RED+msg)
 
-        else:
-            self.log_handle.log(verbosity, Fore.MAGENTA+msg)
+            else:
+                self.log_handle.log(verbosity, Fore.MAGENTA+msg)
 
     def get_verbosity_level(self, verbosity):
         ret_value = VERBOSITY_LEVELS['info']
