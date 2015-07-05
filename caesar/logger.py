@@ -27,8 +27,9 @@ VERBOSITY_LEVELS = {
                     }
 
 class Logger:
-    def __init__(self):
-        verbosity = VERBOSITY_LEVELS['trace']
+    def __init__(self, verbosity):
+
+        logging_level = self.get_verbosity_level(verbosity)
 
         log_format = logging.Formatter('%(message)s')
 
@@ -36,7 +37,7 @@ class Logger:
         stream_handle.setFormatter(log_format)
 
         self.log_handle = logging.getLogger(__name__)
-        self.log_handle.setLevel(verbosity)
+        self.log_handle.setLevel(logging_level)
 
         self.log_handle.addHandler(stream_handle)
 
