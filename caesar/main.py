@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 
 from .connection import Connection
+
+from .logger import Logger
+from .logger import VERBOSITY_LEVELS
 from .mail import prepare_msg
 from .mail import get_password_from_user
 from .save_credential import save_email_password
@@ -42,6 +45,12 @@ def parse_args():
 def main():
 
     argu = parse_args()
+
+
+    if argu.verbosity is None:
+        argu.verbosity = 1
+
+    logger = Logger(argu.verbosity)
 
     conn = Connection()
     if argu.add_cred:
