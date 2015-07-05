@@ -8,13 +8,22 @@ from colorama import Fore
 
 init(autoreset=True)
 
-TRACE=41 #1 above logging.ERROR
-logging.addLevelName(TRACE, 'TRACE') #Renaming logging.CRITICAL
+#Order of verbosity TRACE>ERROR>INFO
+TRACE=10
+logging.addLevelName(TRACE, 'TRACE')
+
+ERROR=30
+logging.addLevelName(ERROR, 'ERROR')
+
+INFO=50
+logging.addLevelName(INFO, 'INFO')
+
+
 
 VERBOSITY_LEVELS = {
-                    'trace' : TRACE,
-                    'error' : logging.ERROR,
-                    'info'  : logging.INFO
+                    'trace' : TRACE,    #3
+                    'error' : ERROR,    #2
+                    'info'  : INFO      #1
                     }
 
 class Logger:
