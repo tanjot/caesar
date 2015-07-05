@@ -6,7 +6,7 @@ import sys
 from colorama import init
 from colorama import Fore
 
-init(autoreset=True)
+init()
 
 #Order of verbosity TRACE>ERROR>INFO
 TRACE=10
@@ -51,6 +51,8 @@ class Logger:
 
             else:
                 self.log_handle.log(verbosity, Fore.MAGENTA+msg)
+
+        print(Fore.RESET)
 
     def get_verbosity_level(self, verbosity):
         ret_value = VERBOSITY_LEVELS['info']
