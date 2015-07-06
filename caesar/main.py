@@ -52,7 +52,7 @@ def main():
 
     logger = Logger(argu.verbosity)
 
-    conn = Connection()
+    conn = Connection(logger)
     if argu.add_cred:
         save_email_password(argu.add_cred, get_password_from_user())
 

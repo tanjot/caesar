@@ -4,13 +4,15 @@ import smtplib
 import socket
 
 from .mail import get_password_from_file
+from .logger import Logger
 from colorama import init
 from colorama import Fore
 
 init()
 
 class Connection:
-
+    def __init__(self, logger ):
+        self.logger = logger
     def create_conn(self, host, port):
         try:
             self.server = smtplib.SMTP(host, port)
