@@ -51,7 +51,7 @@ def main():
     logger = Logger(argu.verbosity)
 
     conn = Connection(logger)
-    cred = Credentials()
+    cred = Credentials(logger)
 
     if argu.add_cred:
         cred.save_email_password(argu.add_cred,  get_password_from_user())

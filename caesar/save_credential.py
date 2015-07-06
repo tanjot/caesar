@@ -4,7 +4,8 @@ from os import path
 
 class Credentials:
 
-    def __init__(self):
+    def __init__(self, logger):
+        self.logger = logger
         self.cred_filename = path.join(path.expanduser('~'), 'caesar_user.conf')
         self.server_conf_filename = path.join(path.expanduser('~'), 'caesar_server.conf')
 
