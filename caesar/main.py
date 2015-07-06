@@ -3,9 +3,7 @@
 from .connection import Connection
 
 from .logger import Logger
-from .logger import VERBOSITY_LEVELS
-from .mail import prepare_msg
-from .mail import get_password_from_user
+from .mail import Mail
 from .save_credential import Credentials
 
 import argparse
@@ -52,9 +50,10 @@ def main():
 
     conn = Connection(logger)
     cred = Credentials(logger)
+    mail = Mail(logger)
 
     if argu.add_cred:
-        cred.save_email_password(argu.add_cred,  get_password_from_user())
+        cred.save_email_password(argu.add_cred,  mail.get_password_from_user())
 
     else:
         host=None
@@ -73,7 +72,7 @@ def main():
             host, port = cred.get_server_conf('gmail')
 
         if conn.create_conn(host, port) is True:
-            msg = prepare_msg()
+            msg = mail.prepare_msg()
             conn.send_mail(msg)
 
 

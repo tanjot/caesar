@@ -3,7 +3,7 @@
 import smtplib
 import socket
 
-from .mail import get_password_from_file
+from .mail import Mail
 from .logger import Logger
 from .logger import VERBOSITY_LEVELS
 from colorama import init
@@ -40,7 +40,8 @@ class Connection:
     def send_mail(self, msg):
 
         try:
-            password = get_password_from_file(msg['from'])
+            mail = Mail(self.logger)
+            password = mail.get_password_from_file(msg['from'])
             self.server.login(msg['from'], password)
             self.server.sendmail(msg['from'], msg['to'], msg.as_string())
             self.server.close()
