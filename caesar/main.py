@@ -6,9 +6,7 @@ from .logger import Logger
 from .logger import VERBOSITY_LEVELS
 from .mail import prepare_msg
 from .mail import get_password_from_user
-from .save_credential import save_email_password
-from .save_credential import save_server_conf
-from .save_credential import get_server_conf
+from .save_credential import Credentials
 
 import argparse
 
@@ -53,8 +51,10 @@ def main():
     logger = Logger(argu.verbosity)
 
     conn = Connection(logger)
+    cred = Credentials()
+
     if argu.add_cred:
-        save_email_password(argu.add_cred, get_password_from_user())
+        cred.save_email_password(argu.add_cred,  get_password_from_user())
 
     else:
         host=None
@@ -63,14 +63,14 @@ def main():
         if argu.server_conf:
             host=argu.server_conf[1]
             port=argu.server_conf[2]
-            save_server_conf(argu.server_conf[0], host, port)
+            cred.save_server_conf(argu.server_conf[0], host, port)
 
         elif argu.choose_conf:
-            host, port=get_server_conf(argu.choose_conf)
+            host, port = cred.get_server_conf(argu.choose_conf)
 
         else:
 
-            host, port = get_server_conf('gmail')
+            host, port = cred.get_server_conf('gmail')
 
         if conn.create_conn(host, port) is True:
             msg = prepare_msg()

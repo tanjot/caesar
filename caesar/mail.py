@@ -7,7 +7,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 import os
-from .save_credential import get_password
+from .save_credential import Credentials
 
 
 def read_data_from_file():
@@ -37,7 +37,8 @@ def get_password_from_user():
     return getpass.getpass('Enter password: ')
 
 def get_password_from_file(email):
-    pwd = get_password(email)
+    cred = Credentials()
+    pwd = cred.get_password(email)
 
     if pwd is None:
         pwd = get_password_from_user()
