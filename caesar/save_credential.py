@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 from os import path
+from .logger import VERBOSITY_LEVELS
 
 class Credentials:
 
@@ -29,7 +30,7 @@ class Credentials:
         except StopIteration:
             fhan.close()
         except FileNotFoundError:
-            print('Configuration file does not exist')
+            self.logger.print_log(VERBOSITY_LEVELS['info'], 'Configuration file does not exist')
 
         return pwd
 
@@ -57,12 +58,12 @@ class Credentials:
         except StopIteration:
             fhan.close()
         except FileNotFoundError:
-            print('Configuration file does not exist')
+            self.logger.print_log(VERBOSITY_LEVELS['info'], 'Configuration file does not exist')
 
         #Following case will not create connection, gives SMTPServerDisconnected
         #exception
         if host is None or port is None:
-            print('Problem finding the specified settings. Either the settings'
+            self.logger.print_log(VERBOSITY_LEVELS['info'], 'Problem finding the specified settings. Either the settings'
             'stored are incorrect or server configuration file does not exist')
 
         return host, port
