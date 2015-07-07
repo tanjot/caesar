@@ -14,10 +14,13 @@ init()
 class Connection:
     def __init__(self, logger ):
         self.logger = logger
+
     def create_conn(self, host, port):
         try:
             self.server = smtplib.SMTP(host, port)
-            self.server.set_debuglevel(True)
+
+            if self.logger.logging_level == VERBOSITY_LEVELS['trace']:
+                self.server.set_debuglevel(True)
             self.server.ehlo()
             self.server.starttls()
 
