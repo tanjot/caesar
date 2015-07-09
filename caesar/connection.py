@@ -4,7 +4,6 @@ import smtplib
 import socket
 
 from .mail import Mail
-from .logger import Logger
 from .logger import VERBOSITY_LEVELS
 from colorama import init
 from colorama import Fore
