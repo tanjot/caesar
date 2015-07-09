@@ -30,9 +30,9 @@ class Mail():
         return content, filename
 
 
-    def attach_file(self):
+    def attach_file(self, filename=None):
         base = MIMEBase('application', "octet-stream")
-        content, filename = self.read_data_from_file()
+        content, filename = self.read_data_from_file(filename)
 
         base.set_payload(content)
         encoders.encode_base64(base)
