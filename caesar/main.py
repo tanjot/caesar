@@ -37,6 +37,11 @@ def parse_args():
                         type=int,
                         choices=range(1, 4)
                         )
+
+    parser.add_argument('-m', '--msg',
+                        help='Type message to be sent inside quotes',
+                        type=str
+                        )
     return parser.parse_args()
 
 def main():
