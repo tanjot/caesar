@@ -3,6 +3,7 @@
 from .connection import Connection
 
 from .logger import Logger
+from .logger import VERBOSITY_LEVELS
 from .mail import Mail
 from .save_credential import Credentials
 
@@ -73,7 +74,8 @@ def main():
 
         if conn.create_conn(host, port) is True:
             msg = mail.prepare_msg()
-            conn.send_mail(msg)
+            if conn.send_mail(msg) is True:
+                logger.print_log(VERBOSITY_LEVELS['info'], 'Mail sent')
 
 
 if __name__ == '__main__':
