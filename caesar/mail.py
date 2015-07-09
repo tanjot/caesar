@@ -8,10 +8,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from .save_credential import Credentials
-from .utils import Utils
+from .utils import input_for_python_2_3
 
-utils = Utils()
-input = utils.input_for_python_2_3()
+input = input_for_python_2_3()
 
 class Mail():
 
