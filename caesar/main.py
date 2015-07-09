@@ -42,6 +42,13 @@ def parse_args():
                         help='Type message to be sent inside quotes',
                         type=str
                         )
+
+    parser.add_argument('-f', '--file',
+                        help='Attach file with mail',
+                        type=str,
+                        nargs='+'
+                        )
+
     return parser.parse_args()
 
 def main():
