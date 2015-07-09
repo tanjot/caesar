@@ -18,8 +18,10 @@ class Mail():
     def __init__(self, logger):
         self.logger = logger
 
-    def read_data_from_file(self):
-        filename = input('Enter file to read data: ')
+    def read_data_from_file(self, filename=None):
+
+        if filename is None:
+            filename = input('Enter file to read data: ')
 
         fhan = open( filename, 'rb')
 
