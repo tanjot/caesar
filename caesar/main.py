@@ -85,7 +85,7 @@ def main():
             host, port = cred.get_server_conf('gmail')
 
         if conn.create_conn(host, port) is True:
-            msg = mail.prepare_msg(argu.msg)
+            msg = mail.prepare_msg(argu.msg, argu.file)
             if conn.send_mail(msg) is True:
                 logger.print_log(VERBOSITY_LEVELS['info'], 'Mail sent')
 
