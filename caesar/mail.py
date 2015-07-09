@@ -3,6 +3,7 @@
 import getpass
 
 from .logger import Logger
+from .logger import VERBOSITY_LEVELS
 from email import encoders
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -53,13 +54,14 @@ class Mail():
         return pwd
 
     def prepare_msg(self):
-        msg = MIMEMultipart()
-        #msg = MIMEText(read_data_from_file())
+        try:
+            msg = MIMEMultipart()
 
-        msg.attach(self.attach_file())
-        msg['To'] = input('Enter recipients address: ')
-        msg['Subject'] = input('Give a subject: ')
-        msg['From'] = self.get_email()
-
+            msg.attach(self.attach_file())
+            msg['To'] = input('Enter recipients address: ')
+            msg['Subject'] = input('Give a subject: ')
+            msg['From'] = self.get_email()
+        except AttributeError:
+            self.logger.print_log(VERBOSITY_LEVELS['error'], 'You are probably attaching a non MIMEText object')
         return msg
 
