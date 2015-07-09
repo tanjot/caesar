@@ -53,11 +53,19 @@ class Mail():
 
         return pwd
 
-    def prepare_msg(self):
+    def prepare_msg(self, msg_received=None):
         try:
             msg = MIMEMultipart()
 
-            msg.attach(self.attach_file())
+            part1=None
+            if msg_received is not None:
+                 part1 = MIMEText(msg_received)
+
+            part2 = self.attach_file()
+
+            if part1 is not None:
+                msg.attach(part1)
+            msg.attach(part2)
             msg['To'] = input('Enter recipients address: ')
             msg['Subject'] = input('Give a subject: ')
             msg['From'] = self.get_email()
