@@ -63,13 +63,13 @@ class Mail():
             if msg_received is not None:
                  part1 = MIMEText(msg_received)
 
+            if part1 is not None:
+                msg.attach(part1)
+
             part2= None
             if attach_file is not None:
                 print('Attach file')
                 part2 = self.attach_file(attach_file[0])
-
-            if part1 is not None:
-                msg.attach(part1)
 
             if part2 is not None:
                 msg.attach(part2)
@@ -77,6 +77,7 @@ class Mail():
             msg['To'] = input('Enter recipients address: ')
             msg['Subject'] = input('Give a subject: ')
             msg['From'] = self.get_email()
+
         except AttributeError:
             self.logger.print_log(VERBOSITY_LEVELS['error'], 'You are probably attaching a non MIMEText object')
         return msg
