@@ -68,14 +68,13 @@ class Mail():
 
             part2= None
             if attach_file is not None:
-                print('Attach file')
                 if len(attach_file) is 0:
                     self.attach_file(None)
+                    msg.attach(part2)
                 else:
-                    part2 = self.attach_file(attach_file[0])
-
-            if part2 is not None:
-                msg.attach(part2)
+                    for filename in attach_file:
+                        part2 = self.attach_file(filename)
+                        msg.attach(part2)
 
             msg['To'] = input('Enter recipients address: ')
             msg['Subject'] = input('Give a subject: ')
