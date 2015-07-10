@@ -46,7 +46,7 @@ def parse_args():
     parser.add_argument('-f', '--file',
                         help='Attach file with mail',
                         type=str,
-                        nargs='+'
+                        nargs='*'
                         )
 
     return parser.parse_args()
