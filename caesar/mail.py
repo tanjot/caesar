@@ -59,22 +59,18 @@ class Mail():
         try:
 
             msg = MIMEMultipart()
-            part1 = None
             if msg_received is not None:
-                 part1 = MIMEText(msg_received)
+                 part = MIMEText(msg_received)
+                 msg.attach(part)
 
-            if part1 is not None:
-                msg.attach(part1)
-
-            part2= None
             if attach_file is not None:
                 if len(attach_file) is 0:
-                    self.attach_file(None)
-                    msg.attach(part2)
+                    part = self.attach_file(None)
+                    msg.attach(part)
                 else:
                     for filename in attach_file:
-                        part2 = self.attach_file(filename)
-                        msg.attach(part2)
+                        part = self.attach_file(filename)
+                        msg.attach(part)
 
             msg['To'] = input('Enter recipients address: ')
             msg['Subject'] = input('Give a subject: ')
