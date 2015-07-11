@@ -47,7 +47,7 @@ Mail sent
 
 
 There's more to it, mix and match the options according to need. Send message
-along with attching files.
+along with attachments.
 ```sh
 $:  caesar -m 'Your message here' -f file1 file2
 ```
