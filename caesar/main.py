@@ -67,17 +67,16 @@ def main():
 
     if argu.add_cred:
         cred.save_email_password(argu.add_cred,  mail.get_password_from_user())
-
+    elif argu.server_conf:
+        host=argu.server_conf[1]
+        port=argu.server_conf[2]
+        cred.save_server_conf(argu.server_conf[0], host, port)
     else:
         host=None
         port=None
 
-        if argu.server_conf:
-            host=argu.server_conf[1]
-            port=argu.server_conf[2]
-            cred.save_server_conf(argu.server_conf[0], host, port)
 
-        elif argu.choose_conf:
+        if argu.choose_conf:
             host, port = cred.get_server_conf(argu.choose_conf)
 
         else:
