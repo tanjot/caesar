@@ -87,6 +87,7 @@ class Mail():
             msg['From'] = self.get_email()
 
         except AttributeError:
-            self.logger.print_log(VERBOSITY_LEVELS['error'], 'You are probably attaching a non MIMEText object')
+            self.logger.print_log(VERBOSITY_LEVELS['error'], 'You are probably attaching a non MIMEText object'
+                     'or there is a problem with variable name')
         return msg
 
