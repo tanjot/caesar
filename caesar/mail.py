@@ -57,11 +57,12 @@ class Mail():
 
         return pwd
 
-    def prepare_msg(self, msg_received=None, attach_file=None):
+    def prepare_msg(self, msg_received=None, attach_file=None, edit_msg=False):
         try:
 
             msg = MIMEMultipart()
-            if msg_received is None and attach_file is None:
+            if (msg_received is None and attach_file is None) or (edit_msg ==
+            True):
                 temp = tempfile.NamedTemporaryFile(suffix='task')
                 sp.call(['vim', temp.name])
                 text = open(temp.name, 'r').read()
