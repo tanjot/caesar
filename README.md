@@ -9,7 +9,7 @@ Yeah, that's how you spell caesar!
 Save email id and password in a configuration file. Henceforth, password for
 email id  will be extracted from file itself. 
 ```sh
-$:  caesar -sc charmingtanjot
+$:  caesar -sc abc@gmail.com
 ```
 Enter password:
 
