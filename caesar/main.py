@@ -49,6 +49,11 @@ def parse_args():
                         nargs='*'
                         )
 
+    parser.add_argument('-e', '--edit',
+                        help='Type msg in editor',
+                        action='store_true'
+                        )
+
     return parser.parse_args()
 
 def main():
