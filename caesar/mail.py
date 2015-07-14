@@ -3,6 +3,7 @@
 import getpass
 import tempfile
 import subprocess as sp
+import os
 
 from .logger import Logger
 from .logger import VERBOSITY_LEVELS
@@ -61,15 +62,20 @@ class Mail():
         try:
 
             msg = MIMEMultipart()
-            if (msg_received is None and attach_file is None) or (edit_msg ==
-            True):
-                temp = tempfile.NamedTemporaryFile(suffix='task')
+
+            if (msg_received is None and attach_file is None) or (edit_msg is
+                    True):
+                temp = tempfile.NamedTemporaryFile(suffix='task', delete=False)
+                if msg_received is not None:
+                    temp.write(bytes(msg_received, 'UTF-8'))
+                    temp.close()
                 sp.call(['vim', temp.name])
                 text = open(temp.name, 'r').read()
+                os.unlink(temp.name)
 
                 msg.attach(MIMEText(text))
 
-            if msg_received is not None:
+            if edit_msg is False and msg_received is not None:
                  part = MIMEText(msg_received)
                  msg.attach(part)
 
