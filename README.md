@@ -45,6 +45,17 @@ Email: abc@gmail.com
 Mail sent
 ```
 
+Type your message in editor along with attachments
+```sh
+$: caesar -f IMG.jpg -e -m 'hey'                                                                            
+Enter recipients address: abc@yahoo.com
+###Message opens up in vim here###
+Give a subject: hi
+Enter login details
+Email: abc@gmail.com
+Mail sent
+```
+
 
 There's more to it, mix and match the options according to need. Send message
 along with attachments.
