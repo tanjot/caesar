@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import base64
 from os import path
 from .logger import VERBOSITY_LEVELS
 
@@ -11,9 +12,11 @@ class Credentials:
         self.server_conf_filename = path.join(path.expanduser('~'), 'caesar_server.conf')
 
     def save_email_password(self, email, pwd):
-        with open(self.cred_filename, 'a') as fhan:
-            fhan.write(email+'\n')
-            fhan.write(pwd+'\n')
+        with open(self.cred_filename, 'ab') as fhan:
+            fhan.write(bytes(email+'\n', 'UTF-8'))
+            fhan.write(base64.b64encode(pwd.encode('UTF-8')))#bytes(pwd+'\n', 'UTF-8'))
+            fhan.write(bytes('\n', 'UTF-8'))
+            print(base64.b64encode(bytes(pwd+'\n', 'UTF-8')))
 
     def get_password(self, email_recv):
         pwd=None
@@ -21,9 +24,10 @@ class Credentials:
         try:
             fhan = open(self.cred_filename, 'r')
             email = fhan.readline().strip()
+            print('email: '+str(email))
             while email:
                 if email == email_recv:
-                    pwd = fhan.readline().strip()
+                    pwd = base64.b64decode(fhan.readline().strip()).decode('UTF-8')
                     break
                 fhan.readline()
                 email=fhan.readline().strip()
