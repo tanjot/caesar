@@ -20,7 +20,7 @@ except (IOError, ImportError):
 
 setup(
     name ='caesar',
-    version='0.1.1',
+    version='0.1.2',
     packages=['caesar'],
     license='GPLv3',
     description="",
