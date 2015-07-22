@@ -18,13 +18,32 @@ class Credentials:
             fhan.write(bytes('\n', 'UTF-8'))
             print(base64.b64encode(bytes(pwd+'\n', 'UTF-8')))
 
+    def check_email_exists(self, email_recv):
+
+        try:
+            fhan = open(self.cred_filename, 'r')
+            email = fhan.readline().strip()
+            while email:
+                if email == email_recv:
+                    return True
+
+                fhan.readline()
+                email=fhan.readline().strip()
+        except StopIteration:
+            fhan.close()
+        except FileNotFoundError:
+            self.logger.print_log(VERBOSITY_LEVELS['info'], 'Configuration file does not exist')
+            return False
+
+        return False
+
+
     def get_password(self, email_recv):
         pwd=None
 
         try:
             fhan = open(self.cred_filename, 'r')
             email = fhan.readline().strip()
-            print('email: '+str(email))
             while email:
                 if email == email_recv:
                     pwd = base64.b64decode(fhan.readline().strip()).decode('UTF-8')
