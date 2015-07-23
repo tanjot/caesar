@@ -71,7 +71,8 @@ def main():
     mail = Mail(logger)
 
     if argu.add_cred:
-        cred.save_email_password(argu.add_cred,  mail.get_password_from_user())
+        if cred.check_email_exists(argu.add_cred) is False:
+            cred.save_email_password(argu.add_cred,  mail.get_password_from_user())
     elif argu.server_conf:
         host=argu.server_conf[1]
         port=argu.server_conf[2]
