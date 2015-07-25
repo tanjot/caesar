@@ -62,6 +62,7 @@ class Mail():
         try:
 
             msg = MIMEMultipart()
+            empty_mail = 0
 
             if (msg_received is None and attach_file is None) or (edit_msg is
                     True):
@@ -69,28 +70,59 @@ class Mail():
                 if msg_received is not None:
                     temp.write(bytes(msg_received, 'UTF-8'))
                     temp.close()
+                    empty_mail = empty_mail+1
                 sp.call(['vim', temp.name])
                 text = open(temp.name, 'r').read()
                 os.unlink(temp.name)
 
                 msg.attach(MIMEText(text))
+                if text.strip() != '':
+                    empty_mail = empty_mail+1
 
             if edit_msg is False and msg_received is not None:
                  part = MIMEText(msg_received)
                  msg.attach(part)
+                 empty_mail = empty_mail+1
 
             if attach_file is not None:
                 if len(attach_file) is 0:
                     part = self.attach_file(None)
                     msg.attach(part)
+                    empty_mail = empty_mail+1
                 else:
                     for filename in attach_file:
                         part = self.attach_file(filename)
                         msg.attach(part)
+                        empty_mail = empty_mail+1
 
-            msg['To'] = input('Enter recipients address: ')
-            msg['Subject'] = input('Give a subject: ')
-            msg['From'] = self.get_email()
+            confirm = None
+            if empty_mail is 0:
+                confirm = input('The mail is empty, do u still wanna send'
+                    '(y/n):')
+                while True:
+                    if confirm is 'y' or confirm is 'yes':
+                        self.logger.print_log(VERBOSITY_LEVELS['info'],
+                                'Sending your mail....')
+                        confirm = None
+                        break
+                    elif confirm is 'n' or confirm is 'no':
+                        self.logger.print_log(VERBOSITY_LEVELS['info'],
+                                'Cancelling mail....')
+                        break
+                    else:
+                        self.logger.print_log(VERBOSITY_LEVELS['info'],
+                                'Please press y or n....')
+                        confirm = input('The mail is empty, do u still wanna send'
+                            '(y/n):')
+                        pass
+
+
+            if confirm is None:
+                msg['To'] = input('Enter recipients address: ')
+                msg['Subject'] = input('Give a subject: ')
+                msg['From'] = self.get_email()
+            else:
+                msg = None
 
         except AttributeError:
             self.logger.print_log(VERBOSITY_LEVELS['error'], 'You are probably attaching a non MIMEText object'

@@ -94,7 +94,7 @@ def main():
 
         if conn.create_conn(host, port) is True:
             msg = mail.prepare_msg(argu.msg, argu.file, argu.edit)
-            if conn.send_mail(msg) is True:
+            if msg is not None and conn.send_mail(msg) is True:
                 logger.print_log(VERBOSITY_LEVELS['info'], 'Mail sent')
 
 
