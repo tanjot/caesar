@@ -77,9 +77,15 @@ def main():
             logger.print_log(VERBOSITY_LEVELS['info'], 'Email ID already'
                 'exists')
     elif argu.server_conf:
+        host_name = argu.server_conf[0]
         host=argu.server_conf[1]
         port=argu.server_conf[2]
-        cred.save_server_conf(argu.server_conf[0], host, port)
+
+        if cred.check_server_exists(host_name) is False:
+            cred.save_server_conf(host_name, host, port)
+        else:
+            logger.print_log(VERBOSITY_LEVELS['info'], 'Server settings already'
+                'exists')
     else:
         host=None
         port=None
@@ -96,6 +102,8 @@ def main():
             msg = mail.prepare_msg(argu.msg, argu.file, argu.edit)
             if msg is not None and conn.send_mail(msg) is True:
                 logger.print_log(VERBOSITY_LEVELS['info'], 'Mail sent')
+
+    return 0
 
 
 if __name__ == '__main__':

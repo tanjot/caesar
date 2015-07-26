@@ -57,6 +57,24 @@ class Credentials:
 
         return pwd
 
+    def check_server_exists(self, host_name_recv):
+
+        try:
+            fhan = open(self.server_conf_filename, 'r')
+            host_name = fhan.readline().strip()
+            while host_name:
+                if host_name == host_name_recv:
+                    return True
+                fhan.readline()
+                host_name = fhan.readline().strip()
+        except StopIteration:
+            fhan.close()
+        except FileNotFoundError:
+            self.logger.print_log(VERBOSITY_LEVELS['info'], 'Configuration file does not exist')
+            return False
+
+        return False
+
 
     def save_server_conf(self, name, host, port):
         with open(self.server_conf_filename, 'a')as fhan:
