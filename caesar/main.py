@@ -74,7 +74,7 @@ def main():
         if cred.check_email_exists(argu.add_cred) is False:
             cred.save_email_password(argu.add_cred,  mail.get_password_from_user())
         else:
-            self.logger.print_log(VERBOSITY_LEVELS['info'], 'Email ID already'
+            logger.print_log(VERBOSITY_LEVELS['info'], 'Email ID already'
                 'exists')
     elif argu.server_conf:
         host=argu.server_conf[1]
