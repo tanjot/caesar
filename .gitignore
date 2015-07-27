@@ -60,3 +60,7 @@ caesar.conf
 #IntelliJ
 .idea/
 *iml
+
+#README(other than md)
+*.rst
+*.html
