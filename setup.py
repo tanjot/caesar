@@ -23,7 +23,7 @@ setup(
     version='0.1.2',
     packages=['caesar'],
     license='GPLv3',
-    description="",
+    description="A command line e-mail helper",
     long_description=long_description,
     url='https://github.com/tanjot/caesar',
     author='Tanjot Kaur',
