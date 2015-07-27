@@ -2,12 +2,12 @@ Caesar
 ======
 [![Stories in Ready](https://badge.waffle.io/tanjot/caesar.png?label=ready&title=Ready)](https://waffle.io/tanjot/caesar)
 
-A command line mail helper  
-Yeah, that's how you spell caesar!  
+A command line e-mail helper  
 
 #Usage
 Save email id and password in a configuration file. Henceforth, password for
-email id  will be extracted from file itself. 
+email id  will be extracted from file itself. Don't worry about password
+readibility in configuration file, it's encoded.
 ```sh
 $:  caesar -sc abc@gmail.com
 Enter password:
@@ -25,7 +25,7 @@ $:  caesar -c ymail
 ```
 This will allow sending mail using a yahoo email id
 
-Sending a single line mail is as easy as blinking with caesar.
+With caesar sending a single line mail is as easy as blinking an eye.
 ```sh
 $:  caesar -m 'Your message here'
 Enter recipients address: abc@yahoo.com
@@ -57,8 +57,13 @@ Mail sent
 ```
 
 
-There's more to it, mix and match the options according to need. Send message
-along with attachments.
+This is not it, you can mix and match options according to your need. Send message
+along with attachments or open an editor for typing message.
 ```sh
 $:  caesar -m 'Your message here' -f file1 file2
 ```
+```sh
+$:  caesar -m 'Your message here' -f file1 file2 -e
+```
+
+Enjoy e-mailing!!!
