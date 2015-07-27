@@ -73,6 +73,8 @@ def main():
     if argu.add_cred:
         if cred.check_email_exists(argu.add_cred) is False:
             cred.save_email_password(argu.add_cred,  mail.get_password_from_user())
+            logger.print_log(VERBOSITY_LEVELS['info'], 'Successfully saved '
+                'email and password')
         else:
             logger.print_log(VERBOSITY_LEVELS['info'], 'Email ID already'
                 'exists')
@@ -83,6 +85,8 @@ def main():
 
         if cred.check_server_exists(host_name) is False:
             cred.save_server_conf(host_name, host, port)
+            logger.print_log(VERBOSITY_LEVELS['info'], 'Successfully saved '
+                    'server settings')
         else:
             logger.print_log(VERBOSITY_LEVELS['info'], 'Server settings already'
                 'exists')
