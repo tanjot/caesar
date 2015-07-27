@@ -16,7 +16,6 @@ class Credentials:
             fhan.write(bytes(email+'\n', 'UTF-8'))
             fhan.write(base64.b64encode(pwd.encode('UTF-8')))#bytes(pwd+'\n', 'UTF-8'))
             fhan.write(bytes('\n', 'UTF-8'))
-            print(base64.b64encode(bytes(pwd+'\n', 'UTF-8')))
 
     def check_email_exists(self, email_recv):
 

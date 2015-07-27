@@ -10,8 +10,8 @@ Save email id and password in a configuration file. Henceforth, password for
 email id  will be extracted from file itself. 
 ```sh
 $:  caesar -sc abc@gmail.com
-```
 Enter password:
+```
 
 Save server settings, IP and port number to send mail using the mailing client. The first value given eg: 'ymail' in
 following sample will be used henceforth for referring the server's settings.
@@ -25,7 +25,7 @@ $:  caesar -c ymail
 ```
 This will allow sending mail using a yahoo email id
 
-Sending a small single line mail is as easy as blinking.
+Sending a single line mail is as easy as blinking with caesar.
 ```sh
 $:  caesar -m 'Your message here'
 Enter recipients address: abc@yahoo.com
@@ -35,7 +35,7 @@ Email: abc@gmail.com
 Mail sent
 ```
 
-Add all file to be attached in one go!!!
+Add all files to be attached in one go!
 ```sh
 $:  caesar -f file1.txt file2.py
 Enter recipients address: abc@yahoo.com
