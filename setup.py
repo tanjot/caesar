@@ -20,7 +20,7 @@ except (IOError, ImportError):
 
 setup(
     name ='caesar',
-    version='0.1.2',
+    version='0.1.3',
     packages=['caesar'],
     license='GPLv3',
     description="A command line e-mail helper",
