@@ -31,7 +31,7 @@ class Credentials:
         except StopIteration:
             fhan.close()
         except FileNotFoundError:
-            self.logger.print_log(VERBOSITY_LEVELS['info'], 'Configuration file does not exist')
+            self.logger.print_log(VERBOSITY_LEVELS['error'], 'Configuration file does not exist')
             return False
 
         return False
@@ -52,7 +52,7 @@ class Credentials:
         except StopIteration:
             fhan.close()
         except FileNotFoundError:
-            self.logger.print_log(VERBOSITY_LEVELS['info'], 'Configuration file does not exist')
+            self.logger.print_log(VERBOSITY_LEVELS['error'], 'Configuration file does not exist')
 
         return pwd
 
@@ -69,7 +69,7 @@ class Credentials:
         except StopIteration:
             fhan.close()
         except FileNotFoundError:
-            self.logger.print_log(VERBOSITY_LEVELS['info'], 'Configuration file does not exist')
+            self.logger.print_log(VERBOSITY_LEVELS['error'], 'Configuration file does not exist')
             return False
 
         return False
@@ -98,12 +98,15 @@ class Credentials:
         except StopIteration:
             fhan.close()
         except FileNotFoundError:
-            self.logger.print_log(VERBOSITY_LEVELS['info'], 'Configuration file does not exist')
+            self.logger.print_log(VERBOSITY_LEVELS['error'], 'Configuration '
+                    'file does not exist')
+            self.logger.print_log(VERBOSITY_LEVELS['info'
+            ], 'Add mailing client\'s IP and port using -ss argument')
 
         #Following case will not create connection, gives SMTPServerDisconnected
         #exception
         if host is None or port is None:
             self.logger.print_log(VERBOSITY_LEVELS['info'], 'Problem finding the specified settings. Either the settings'
-            'stored are incorrect or server configuration file does not exist')
+            ' stored are incorrect or server configuration does not exist')
 
         return host, port
