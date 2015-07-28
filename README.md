@@ -62,6 +62,7 @@ along with attachments or open an editor for typing message.
 ```sh
 $:  caesar -m 'Your message here' -f file1 file2
 ```
+OR
 ```sh
 $:  caesar -m 'Your message here' -f file1 file2 -e
 ```
