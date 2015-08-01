@@ -25,16 +25,16 @@ class Connection:
 
 
         except ConnectionRefusedError:
-            self.logger.print_log(VERBOSITY_LEVELS['error'], Fore.RED + 'connection refused')
+            self.logger.print_log(VERBOSITY_LEVELS['info'], Fore.RED + 'connection refused')
             return False
         except socket.gaierror:
-            self.logger.print_log(VERBOSITY_LEVELS['error'],Fore.RED + 'problem connecting with host, check hostname or port')
+            self.logger.print_log(VERBOSITY_LEVELS['info'],Fore.RED + 'problem connecting with host, check hostname or port')
             return False
         except smtplib.SMTPAuthenticationError:
-            self.logger.print_log(VERBOSITY_LEVELS['error'], Fore.RED + 'invalide username or password')
+            self.logger.print_log(VERBOSITY_LEVELS['info'], Fore.RED + 'invalide username or password')
             return False
         except smtplib.SMTPServerDisconnected:
-            self.logger.print_log(VERBOSITY_LEVELS['error'], Fore.RED + 'Server disconnected')
+            self.logger.print_log(VERBOSITY_LEVELS['info'], Fore.RED + 'Server disconnected')
             return False
 
         return True
@@ -48,10 +48,10 @@ class Connection:
             self.server.sendmail(msg['from'], msg['to'], msg.as_string())
             self.server.close()
         except smtplib.SMTPAuthenticationError:
-            self.logger.print_log(VERBOSITY_LEVELS['error'], Fore.RED+'Username/Password could not be authenticated')
+            self.logger.print_log(VERBOSITY_LEVELS['info'], Fore.RED+'Username/Password could not be authenticated')
             return False
         except smtplib.SMTPServerDisconnected:
-            self.logger.print_log(VERBOSITY_LEVELS['error'], Fore.RED + 'Connection got disconnected')
+            self.logger.print_log(VERBOSITY_LEVELS['info'], Fore.RED + 'Connection got disconnected')
             return False
 
         return True
