@@ -7,3 +7,9 @@ def input_for_python_2_3():
     except:
         return input
 
+
+def read_dict_from_file(filename):
+    data_in_dict = {}
+    with open(filename, 'r') as fhan:
+        server_ip = fhan.readline().strip()
+        data_in_dict[server_ip] = fhan.readline().strip()
