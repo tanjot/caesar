@@ -11,6 +11,12 @@ class Credentials:
         self.cred_filename = path.join(path.expanduser('~'), 'caesar_user.conf')
         self.server_conf_filename = path.join(path.expanduser('~'), 'caesar_server.conf')
 
+        self.dict_server = {}
+        self.dict_server = read_dict_from_file(self.server_conf_filename)
+
+        self.dict_user = {}
+        self.dict_user = read_dict_from_file(self.cred_filename)
+
     def save_email_password(self, email, pwd):
         with open(self.cred_filename, 'ab') as fhan:
             fhan.write(bytes(email+'\n', 'UTF-8'))
