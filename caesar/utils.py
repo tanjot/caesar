@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import base64
 
 def input_for_python_2_3():
     try:
@@ -18,6 +19,9 @@ def read_dict_from_file(filename):
         self.logger.print_log(VERBOSITY_LEVELS['error'], 'Configuration file does not exist')
 
     return data_in_dict
+
+def encode_data(data):
+    return base64.b64encode((data).encode('UTF-8'))
 
 
 def write_dict_to_file(filename, key, value):
