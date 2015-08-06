@@ -23,6 +23,8 @@ def read_dict_from_file(filename):
 def encode_data(data):
     return base64.b64encode((data).encode('UTF-8'))
 
+def decode_data(encoded_data):
+    return (base64.b64decode(encoded_data).decode('UTF-8'))
 
 def write_dict_to_file(filename, key, value):
     with open(filename, 'ab') as fhan:
