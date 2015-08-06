@@ -16,7 +16,8 @@ def read_dict_from_file(filename):
 
 
 def write_dict_to_file(filename, key, value):
-    with open(filename, 'a') as fhan:
-        fhan.write(key+'\n')
-        fhan.write(value+'\n')
+    with open(filename, 'ab') as fhan:
+        fhan.write(bytes(key+'\n', 'UTF-8'))
+        fhan.write(value)
+        fhan.write(bytes('\n'+'UTF-8'))
 
