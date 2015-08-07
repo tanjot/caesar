@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 
-import base64
 from os import path
 from .logger import VERBOSITY_LEVELS
+from .utils import read_dict_from_file
+from .utils import write_dict_to_file
 
 class Credentials:
 
@@ -12,9 +13,10 @@ class Credentials:
         self.server_conf_filename = path.join(path.expanduser('~'), 'caesar_server.conf')
 
         self.dict_server = {}
+        self.dict_user = {}
+
         self.dict_server = read_dict_from_file(self.server_conf_filename)
 
-        self.dict_user = {}
         self.dict_user = read_dict_from_file(self.cred_filename)
 
     def save_email_password(self, email, pwd):
