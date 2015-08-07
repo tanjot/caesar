@@ -4,6 +4,8 @@ from os import path
 from .logger import VERBOSITY_LEVELS
 from .utils import read_dict_from_file
 from .utils import write_dict_to_file
+from .utils import encode_data
+from .utils import decode_data
 
 class Credentials:
 
@@ -20,22 +22,13 @@ class Credentials:
         self.dict_user = read_dict_from_file(self.cred_filename)
 
     def save_email_password(self, email, pwd):
-        with open(self.cred_filename, 'ab') as fhan:
-            fhan.write(bytes(email+'\n', 'UTF-8'))
-            fhan.write(base64.b64encode(pwd.encode('UTF-8')))#bytes(pwd+'\n', 'UTF-8'))
-            fhan.write(bytes('\n', 'UTF-8'))
+        write_dict_to_file(self.cred_filename, email, encode_data(pwd))
 
     def check_email_exists(self, email_recv):
 
         try:
-            fhan = open(self.cred_filename, 'r')
-            email = fhan.readline().strip()
-            while email:
-                if email == email_recv:
-                    return True
-
-                fhan.readline()
-                email=fhan.readline().strip()
+            if self.dict_server is not None and email_recv in self.dict_server:
+                return True
         except StopIteration:
             fhan.close()
         except FileNotFoundError:
@@ -49,14 +42,8 @@ class Credentials:
         pwd=None
 
         try:
-            fhan = open(self.cred_filename, 'r')
-            email = fhan.readline().strip()
-            while email:
-                if email == email_recv:
-                    pwd = base64.b64decode(fhan.readline().strip()).decode('UTF-8')
-                    break
-                fhan.readline()
-                email=fhan.readline().strip()
+            if self.dict_server is not None and email_recv in self.dict_user:
+                pwd = decode_data(self.dict_user[email_recv])
         except StopIteration:
             fhan.close()
         except FileNotFoundError:
