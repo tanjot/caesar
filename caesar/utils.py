@@ -16,7 +16,8 @@ def read_dict_from_file(filename):
             server_ip = fhan.readline().strip()
             data_in_dict[server_ip] = fhan.readline().strip()
     except FileNotFoundError:
-        self.logger.print_log(VERBOSITY_LEVELS['error'], 'Configuration file does not exist')
+        #self.logger.print_log(VERBOSITY_LEVELS['error'], 'Configuration file does not exist')
+        print("FileNotFoundError")
 
     return data_in_dict
 
