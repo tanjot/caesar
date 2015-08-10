@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import base64
+import configparser
 
 def input_for_python_2_3():
     try:
@@ -12,9 +13,14 @@ def input_for_python_2_3():
 def read_dict_from_file(filename):
     data_in_dict = {}
     try:
-        with open(filename, 'r') as fhan:
-            server_ip = fhan.readline().strip()
+        fhan = open(filename, 'r')
+
+        line = fhan.readline().strip()
+        while line:
+            server_ip = line
             data_in_dict[server_ip] = fhan.readline().strip()
+            line = fhan.readline().strip()
+
     except FileNotFoundError:
         #self.logger.print_log(VERBOSITY_LEVELS['error'], 'Configuration file does not exist')
         print("FileNotFoundError")
