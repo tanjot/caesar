@@ -27,7 +27,7 @@ class Credentials:
     def check_email_exists(self, email_recv):
 
         try:
-            if self.dict_server is not None and email_recv in self.dict_server:
+            if self.dict_user is not None and email_recv in self.dict_user:
                 return True
         except StopIteration:
             fhan.close()
