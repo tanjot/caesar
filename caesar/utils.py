@@ -30,6 +30,9 @@ def decode_data(encoded_data):
 def write_dict_to_file(filename, key, value):
     with open(filename, 'ab') as fhan:
         fhan.write(bytes(key+'\n', 'UTF-8'))
-        fhan.write(value)
-        fhan.write(bytes('\n'+'UTF-8'))
+        if type(value) is bytes:
+            fhan.write(value)
+        else:
+            fhan.write(bytes(value, 'UTF-8'))
+        fhan.write(bytes('\n','UTF-8'))
 
