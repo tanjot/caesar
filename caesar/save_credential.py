@@ -54,13 +54,8 @@ class Credentials:
     def check_server_exists(self, host_name_recv):
 
         try:
-            fhan = open(self.server_conf_filename, 'r')
-            host_name = fhan.readline().strip()
-            while host_name:
-                if host_name == host_name_recv:
-                    return True
-                fhan.readline()
-                host_name = fhan.readline().strip()
+            if self.dict_server is not None and host_name_recv in self.dict_server:
+                return True
         except StopIteration:
             fhan.close()
         except FileNotFoundError:
@@ -71,25 +66,14 @@ class Credentials:
 
 
     def save_server_conf(self, name, host, port):
-        with open(self.server_conf_filename, 'a')as fhan:
-            fhan.write(name+'\n')
-            fhan.write(host+':'+port+'\n')
+        write_dict_to_file(self.server_conf_filename, name, host+','+port)
 
     def get_server_conf(self, host_name_recv):
         host = None
         port = None
 
         try:
-            fhan = open(self.server_conf_filename, 'r')
-            host_name = fhan.readline().strip()
-            while host_name:
-                if host_name == host_name_recv:
-                    line = fhan.readline().strip().split(':')
-                    host=line[0]
-                    port=line[1]
-                    break
-                fhan.readline()
-                host_name = fhan.readline().strip()
+            host, port = (self.dict_server.get(host_name_recv)).split(',')
         except StopIteration:
             fhan.close()
         except FileNotFoundError:
