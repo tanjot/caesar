@@ -33,12 +33,18 @@ def encode_data(data):
 def decode_data(encoded_data):
     return (base64.b64decode(encoded_data).decode('UTF-8'))
 
-def write_dict_to_file(filename, key, value):
-    with open(filename, 'ab') as fhan:
-        fhan.write(bytes(key+'\n', 'UTF-8'))
-        if type(value) is bytes:
-            fhan.write(value)
-        else:
-            fhan.write(bytes(value, 'UTF-8'))
-        fhan.write(bytes('\n','UTF-8'))
+def append_key_value_to_file(filename, key, value):
+    fhan = open(filename, 'ab')
+    add_key_value_to_file(fhan, key, value)
+    fhan.close()
+
+
+def add_key_value_to_file(fhan, key, value):
+    fhan.write(bytes(key+'\n', 'UTF-8'))
+    if type(value) is bytes:
+        fhan.write(value)
+    else:
+        fhan.write(bytes(value, 'UTF-8'))
+    fhan.write(bytes('\n','UTF-8'))
+
 

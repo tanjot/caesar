@@ -3,7 +3,7 @@
 from os import path
 from .logger import VERBOSITY_LEVELS
 from .utils import read_dict_from_file
-from .utils import write_dict_to_file
+from .utils import append_key_value_to_file
 from .utils import encode_data
 from .utils import decode_data
 
@@ -22,7 +22,8 @@ class Credentials:
         self.dict_user = read_dict_from_file(self.cred_filename)
 
     def save_email_password(self, email, pwd):
-        write_dict_to_file(self.cred_filename, email, encode_data(pwd))
+        append_key_value_to_file(self.cred_filename, email, encode_data(pwd))
+
 
     def check_email_exists(self, email_recv):
 
@@ -66,7 +67,7 @@ class Credentials:
 
 
     def save_server_conf(self, name, host, port):
-        write_dict_to_file(self.server_conf_filename, name, host+','+port)
+        append_key_value_to_file(self.server_conf_filename, name, host+','+port)
 
     def get_server_conf(self, host_name_recv):
         host = None
