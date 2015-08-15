@@ -48,3 +48,8 @@ def add_key_value_to_file(fhan, key, value):
     fhan.write(bytes('\n','UTF-8'))
 
 
+def write_dict_to_file(filename, dict_to_fill):
+    fhan = open(filename, 'wb')
+    for key in dict_to_fill.keys():
+        add_key_value_to_file(fhan, key, dict_to_fill[key])
+    fhan.close()
