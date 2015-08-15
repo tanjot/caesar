@@ -4,6 +4,7 @@ from os import path
 from .logger import VERBOSITY_LEVELS
 from .utils import read_dict_from_file
 from .utils import append_key_value_to_file
+from .utils import write_dict_to_file
 from .utils import encode_data
 from .utils import decode_data
 
@@ -24,6 +25,9 @@ class Credentials:
     def save_email_password(self, email, pwd):
         append_key_value_to_file(self.cred_filename, email, encode_data(pwd))
 
+    def replace_password(self, email, pwd):
+        self.dict_user[email] = encode_data(pwd);
+        write_dict_to_file(self.server_conf_filename, self.dict_user)
 
     def check_email_exists(self, email_recv):
 
