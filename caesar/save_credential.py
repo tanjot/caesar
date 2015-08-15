@@ -27,7 +27,8 @@ class Credentials:
 
     def replace_password(self, email, pwd):
         self.dict_user[email] = encode_data(pwd);
-        write_dict_to_file(self.server_conf_filename, self.dict_user)
+        write_dict_to_file(self.cred_filename, self.dict_user)
+
 
     def check_email_exists(self, email_recv):
 
