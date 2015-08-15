@@ -70,6 +70,10 @@ class Credentials:
 
         return False
 
+    def replace_server_conf(self, name, host, port):
+        self.dict_server[name] = host+','+port
+        write_dict_to_file(self.server_conf_filename, self.dict_server)
+
 
     def save_server_conf(self, name, host, port):
         append_key_value_to_file(self.server_conf_filename, name, host+','+port)
