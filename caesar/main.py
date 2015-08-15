@@ -56,6 +56,16 @@ def parse_args():
 
     return parser.parse_args()
 
+def ask_permission_to_edit(logger):
+
+    edit_email = input('Do you want to edit the exisiting details(y/n): ')
+    while edit_email is not 'y' and edit_email is not 'n':
+        logger.print_log(VERBOSITY_LEVELS['info'],
+                'Please press y or n: ')
+        edit_email = input('Do you want to edit the exisiting details(y/n)')
+
+    return edit_email
+
 def main():
 
     argu = parse_args()
@@ -74,17 +84,11 @@ def main():
         if cred.check_email_exists(argu.add_cred) is False:
             cred.save_email_password(argu.add_cred,  mail.get_password_from_user())
             logger.print_log(VERBOSITY_LEVELS['info'], 'Successfully saved '
-                'email and password')
+                    'email and password')
         else:
             logger.print_log(VERBOSITY_LEVELS['info'], 'Email ID already'
-                'exists')
-            edit_email = input('Do you want to edit the exisiting details(y/n): ')
-
-            while edit_email is not 'y' and edit_email is not 'n':
-                logger.print_log(VERBOSITY_LEVELS['info'],
-                        'Please press y or n: ')
-                edit_email = input('Do you want to edit the exisiting details(y/n)')
-
+                    'exists')
+            edit_email = ask_permission_to_edit(logger)
             if edit_email is 'y':
                 cred.replace_password(argu.add_cred, mail.get_password_from_user())
             elif edit_email is 'n':
