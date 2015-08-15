@@ -107,6 +107,13 @@ def main():
         else:
             logger.print_log(VERBOSITY_LEVELS['info'], 'Server settings already'
                     'exists')
+
+            edit_email = ask_permission_to_edit(logger)
+            if edit_email is 'y':
+                cred.replace_server_conf(host_name, host, port)
+            elif edit_email is 'n':
+                logger.print_log(VERBOSITY_LEVELS['info'],
+                        'Exiting....')
     else:
         host=None
         port=None
