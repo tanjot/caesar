@@ -80,18 +80,16 @@ def main():
                 'exists')
             edit_email = input('Do you want to edit the exisiting details(y/n): ')
 
-            while True:
-                if edit_email is 'y' or edit_email is 'yes':
-                    #replace_email()
-                    break
-                elif edit_email is 'n' or edit_email is 'no':
-                    logger.print_log(VERBOSITY_LEVELS['info'],
-                            'Exiting....')
-                    break
-                else:
-                    logger.print_log(VERBOSITY_LEVELS['info'],
-                            'Please press y or n: ')
-                    edit_email = input('Do you want to edit the exisiting details(y/n)')
+            while edit_email is not 'y' and edit_email is not 'n':
+                logger.print_log(VERBOSITY_LEVELS['info'],
+                        'Please press y or n: ')
+                edit_email = input('Do you want to edit the exisiting details(y/n)')
+
+            if edit_email is 'y':
+                cred.replace_password(argu.add_cred, mail.get_password_from_user())
+            elif edit_email is 'n':
+                logger.print_log(VERBOSITY_LEVELS['info'],
+                        'Exiting....')
 
     elif argu.server_conf:
         host_name = argu.server_conf[0]
