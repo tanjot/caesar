@@ -95,6 +95,7 @@ def main():
                 logger.print_log(VERBOSITY_LEVELS['info'],
                         'Exiting....')
 
+
     elif argu.server_conf:
         host_name = argu.server_conf[0]
         host=argu.server_conf[1]
@@ -130,6 +131,10 @@ def main():
             msg = mail.prepare_msg(argu.msg, argu.file, argu.edit)
             if msg is not None and conn.send_mail(msg) is True:
                 logger.print_log(VERBOSITY_LEVELS['info'], 'Mail sent')
+        else:
+            logger.print_log(VERBOSITY_LEVELS['info'],
+                    'Could not create connection....')
+
 
     return 0
 
