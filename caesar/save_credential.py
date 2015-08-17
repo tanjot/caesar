@@ -83,7 +83,7 @@ class Credentials:
         port = None
 
         try:
-            host, port = (self.dict_server.get(host_name_recv)).split(',')
+            host, port = (self.dict_server[host_name_recv]).split(',')
         except StopIteration:
             fhan.close()
         except FileNotFoundError:
