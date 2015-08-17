@@ -23,7 +23,6 @@ class Connection:
             self.server.ehlo()
             self.server.starttls()
 
-
         except ConnectionRefusedError:
             self.logger.print_log(VERBOSITY_LEVELS['info'], Fore.RED + 'connection refused')
             return False
@@ -35,6 +34,11 @@ class Connection:
             return False
         except smtplib.SMTPServerDisconnected:
             self.logger.print_log(VERBOSITY_LEVELS['info'], Fore.RED + 'Server disconnected')
+        except OSError:
+            self.logger.print_log(VERBOSITY_LEVELS['info'], Fore.RED +
+                    'Network is unreachable or configuration in '
+                    'caesar_server.conf is wrong')
+
             return False
 
         return True
