@@ -91,6 +91,9 @@ class Credentials:
                     'file does not exist')
             self.logger.print_log(VERBOSITY_LEVELS['info'
             ], 'Add mailing client\'s IP and port using -ss argument')
+        except AttributeError:
+            self.logger.print_log(VERBOSITY_LEVELS['error'], 'No host or port')
+
 
         #Following case will not create connection, gives SMTPServerDisconnected
         #exception
