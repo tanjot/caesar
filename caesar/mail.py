@@ -66,14 +66,16 @@ class Mail():
 
             if (msg_received is None and attach_file is None) or (edit_msg is
                     True):
-                temp = tempfile.NamedTemporaryFile(suffix='task', delete=False)
+                temp = tempfile.NamedTemporaryFile(suffix=".task", delete=False)
+                print('name: '+temp.name)
                 if msg_received is not None:
                     temp.write(bytes(msg_received, 'UTF-8'))
                     temp.close()
                     empty_mail = empty_mail+1
-                sp.call(['vim', temp.name])
+                sp.call(['vim', temp.name], shell=True)
                 text = open(temp.name, 'r').read()
-                os.unlink(temp.name)
+                os.system('rmdir "%s"' %temp.name)
+                #os.unlink(temp.name)
 
                 msg.attach(MIMEText(text))
                 if text.strip() != '':
