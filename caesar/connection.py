@@ -57,5 +57,10 @@ class Connection:
         except smtplib.SMTPServerDisconnected:
             self.logger.print_log(VERBOSITY_LEVELS['info'], Fore.RED + 'Connection got disconnected')
             return False
+        except smtplib.SMTPRecipientsRefused:            
+            self.logger.print_log(VERBOSITY_LEVELS['info'], Fore.RED +
+                    'Receipient refused')
+            return False
+
 
         return True
